@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NVU-PORTAL Application</title>
+    
+    <!-- Loading Tailwind CSS for layout and styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Loading FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #e5e7eb; /* خلفية لسطح المكتب */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .mobile-container {
+            width: 100%;
+            max-width: 414px;
+            height: 100vh;
+            max-height: 900px;
+            background-color: #345877; /* Default for login */
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Custom styling to remove autofill yellow backgrounds */
+        input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 30px white inset !important;
+        }
+
+        /* View wrappers for switching pages */
+        .view-section {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Scrollbar customization for the profile view */
+        #profile-view {
+            overflow-y: auto;
+            overflow-x: hidden;
+            background-color: #ffffff; /* White background for profile */
+        }
+        
+        #profile-view::-webkit-scrollbar {
+            width: 5px;
+        }
+        #profile-view::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container" id="app-container">
+        
+        <!-- ============================================== -->
+        <!-- ================ LOGIN SCREEN ================ -->
+        <!-- ============================================== -->
+        <div id="login-view" class="view-section">
+            <header class="bg-white flex flex-col items-center pt-5 pb-2 shrink-0">
+                <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1790663557/new-logo_gwiyhl.png" alt="Nile Valley University Logo" class="h-[65px] object-contain">
+                <h1 class="text-[#8d9399] font-bold text-[15px] mt-1.5 tracking-wide">NVU-PORTAL</h1>
+            </header>
+
+            <div class="flex h-[7px] w-full shrink-0">
+                <div class="bg-[#f47f20] w-[80%]"></div>
+                <div class="bg-[#2b5b84] w-[20%]"></div>
+            </div>
+
+            <main class="px-12 pt-8 flex-grow bg-[#345877] flex flex-col justify-start">
+                <form class="flex flex-col gap-3" onsubmit="event.preventDefault(); handleLogin();">
+                    
+                    <div class="flex bg-white h-[32px] items-center">
+                        <div class="w-10 flex justify-center text-[#8e959b]">
+                            <i class="fa-solid fa-user text-[13px]"></i>
+                        </div>
+                        <div class="w-[1px] h-4 bg-gray-300"></div>
+                        <input type="text" placeholder="User Name" class="flex-grow px-3 py-1 outline-none text-gray-700 text-[13px] bg-transparent w-full">
+                    </div>
+
+                    <div class="flex justify-between items-center text-white text-[12px] px-0 mt-0.5 mb-0.5">
+                        <label class="flex items-center gap-1 cursor-pointer">
+                            <div class="relative flex items-center justify-center w-[15px] h-[15px]">
+                                <input type="radio" name="role" checked class="peer appearance-none w-[15px] h-[15px] bg-white rounded-full cursor-pointer m-0">
+                                <div class="absolute inset-0 rounded-full bg-[#345877] border-[1.5px] border-white hidden peer-checked:flex items-center justify-center pointer-events-none">
+                                     <i class="fa-solid fa-check text-white text-[9px]"></i>
+                                </div>
+                            </div>
+                            <span>Student</span>
+                        </label>
+                        <label class="flex items-center gap-1.5 cursor-pointer">
+                            <div class="relative flex items-center justify-center w-[15px] h-[15px]">
+                                <input type="radio" name="role" class="peer appearance-none w-[15px] h-[15px] bg-white rounded-full cursor-pointer m-0">
+                                <div class="absolute inset-0 rounded-full bg-[#345877] border-[1.5px] border-white hidden peer-checked:flex items-center justify-center pointer-events-none">
+                                     <i class="fa-solid fa-check text-white text-[9px]"></i>
+                                </div>
+                            </div>
+                            <span>Graduate</span>
+                        </label>
+                        <label class="flex items-center gap-1.5 cursor-pointer">
+                            <div class="relative flex items-center justify-center w-[15px] h-[15px]">
+                                <input type="radio" name="role" class="peer appearance-none w-[15px] h-[15px] bg-white rounded-full cursor-pointer m-0">
+                                <div class="absolute inset-0 rounded-full bg-[#345877] border-[1.5px] border-white hidden peer-checked:flex items-center justify-center pointer-events-none">
+                                     <i class="fa-solid fa-check text-white text-[9px]"></i>
+                                </div>
+                            </div>
+                            <span>Parent</span>
+                        </label>
+                        <label class="flex items-center gap-1.5 cursor-pointer">
+                            <div class="relative flex items-center justify-center w-[15px] h-[15px]">
+                                <input type="radio" name="role" class="peer appearance-none w-[15px] h-[15px] bg-white rounded-full cursor-pointer m-0">
+                                <div class="absolute inset-0 rounded-full bg-[#345877] border-[1.5px] border-white hidden peer-checked:flex items-center justify-center pointer-events-none">
+                                     <i class="fa-solid fa-check text-white text-[9px]"></i>
+                                </div>
+                            </div>
+                            <span>Staff</span>
+                        </label>
+                    </div>
+
+                    <div class="flex bg-white h-[32px] items-center">
+                        <div class="w-10 flex justify-center text-[#8e959b]">
+                            <i class="fa-solid fa-asterisk text-[10px]"></i>
+                        </div>
+                        <div class="w-[1px] h-4 bg-gray-300"></div>
+                        <input type="password" placeholder="Password" class="flex-grow px-3 py-1 outline-none text-gray-700 text-[13px] bg-transparent w-full">
+                    </div>
+
+                    <div class="text-right -mt-1.5">
+                        <a href="#" class="text-white text-[11.5px] underline hover:text-gray-200 transition-colors">Forget your password?</a>
+                    </div>
+
+                    <button type="submit" class="w-full bg-[#f47f20] hover:bg-[#df6d15] text-white font-medium text-[14px] h-[32px] mt-0.5 transition-colors cursor-pointer">
+                        Login
+                    </button>
+                </form>
+            </main>
+
+            <footer class="w-full shrink-0">
+                <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1790663557/Screenshot_20260929_093113_Chrome_gciblm.jpg" alt="Nile Valley University Campus Footer" class="w-full h-auto object-cover block">
+            </footer>
+        </div>
+
+
+        <!-- ============================================== -->
+        <!-- =============== PROFILE SCREEN =============== -->
+        <!-- ============================================== -->
+        <div id="profile-view" class="view-section hidden">
+            <!-- Header -->
+            <header class="bg-[#243447] text-white flex justify-between items-center px-4 py-2.5 shrink-0">
+                <button class="text-gray-300 hover:text-white transition">
+                    <i class="fa-solid fa-bars text-[20px]"></i>
+                </button>
+                <div class="text-center flex flex-col items-center">
+                    <h1 class="text-[#f47f20] font-bold text-[17px] leading-tight tracking-wide">NVU-Portal</h1>
+                    <p class="text-gray-400 text-[10px] leading-none mt-0.5">Nile Valley UniversityLearning Management System</p>
+                </div>
+                <button class="text-gray-300 hover:text-white transition">
+                    <i class="fa-solid fa-gear text-[18px]"></i>
+                </button>
+            </header>
+
+            <!-- Current Semester Bar -->
+            <div class="bg-[#8bc97a] text-white px-4 py-2 flex items-center gap-2 shrink-0">
+                <i class="fa-regular fa-calendar-days text-[26px] opacity-90"></i>
+                <span class="text-[13px] font-medium opacity-90">Current Semester</span>
+            </div>
+
+            <!-- Breadcrumb -->
+            <div class="px-4 py-2.5 text-gray-500 text-[13px] border-b border-gray-100 flex items-center gap-1.5 shrink-0">
+                <i class="fa-solid fa-house text-gray-500 text-[11px]"></i> Home
+            </div>
+
+            <!-- Welcome Section -->
+            <div class="px-5 py-5 shrink-0">
+                <h2 class="text-[#64b564] text-[22px] font-bold mb-1 tracking-wide">Welcome back,</h2>
+                <h3 class="text-[#9ea3a8] text-[16px] mb-4">Oday Abdelrahman Mannaa Mohamed</h3>
+                
+                <p class="text-[#6c757d] text-[13px] leading-relaxed mb-3">
+                    Congratulations, You are now on the electronic portal of Nile Valley University on its cloud servers.
+                </p>
+                <p class="text-[#6c757d] text-[13px] leading-relaxed">
+                    We're glad you're here, and will be happy to help you.
+                </p>
+            </div>
+
+            <!-- Tabs Section -->
+            <div class="mx-4 mb-6 border border-gray-200 rounded-[3px] bg-white shrink-0">
+                <div class="flex flex-wrap bg-[#f1f2f3] text-[#6b7280] text-[12.5px] border-b border-gray-200">
+                    <div class="bg-white border-r border-gray-200 py-2.5 px-3 flex items-center gap-1.5 text-gray-700 font-medium">
+                        <i class="fa-solid fa-file text-[#6c757d]"></i> Files
+                    </div>
+                    <div class="border-r border-gray-200 py-2.5 px-3 flex items-center gap-1.5 hover:bg-gray-200 cursor-pointer transition">
+                        <i class="fa-solid fa-calendar-day text-[#6c757d]"></i> Today Events
+                    </div>
+                    <div class="py-2.5 px-3 flex items-center gap-1.5 relative hover:bg-gray-200 cursor-pointer transition">
+                        <i class="fa-solid fa-bell text-[#6c757d]"></i> Latest Notifications
+                        <span class="absolute -top-1.5 -right-1.5 bg-[#f66767] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full z-10 shadow-sm border border-white">41</span>
+                    </div>
+                    <div class="w-full border-t border-gray-200 py-2.5 px-3 flex items-center gap-1.5 hover:bg-gray-200 cursor-pointer transition">
+                        <i class="fa-solid fa-comments text-[#6c757d]"></i> Latest Messages
+                    </div>
+                </div>
+                
+                <div class="bg-white py-6 flex flex-col items-center justify-center text-gray-500">
+                    <i class="fa-solid fa-file text-[40px] mb-2 text-[#e2e8f0]"></i>
+                    <p class="text-[13px] text-gray-500">No Files founded for you.</p>
+                </div>
+            </div>
+
+            <!-- Bottom Card (Student Info & Stats) -->
+            <div class="border-t border-gray-200 bg-[#f9fafb] shrink-0 mt-auto flex flex-col">
+                <!-- User Info -->
+                <div class="flex items-center px-5 py-4 gap-4">
+                    <div class="w-[60px] h-[60px] rounded-full overflow-hidden border border-gray-300 shadow-sm shrink-0 bg-white">
+                        <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1790664547/IMG-20260929-WA0003_ursqtq.jpg" alt="Student Photo" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <div class="text-[#646a70] font-medium text-[14px] leading-tight mb-1">Oday Abdelrahman Mannaa Mohamed</div>
+                        <div class="text-[#a0a5aa] text-[12.5px] flex items-center gap-1.5">
+                            <i class="fa-regular fa-credit-card text-[11px]"></i> 22610462
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Teal Stats Bar -->
+                <div class="flex bg-[#4bc0c0] text-white py-3 mx-5 mb-2">
+                    <div class="flex-1 flex flex-col items-center justify-center border-r border-[#6ecfcf]">
+                        <div class="text-[20px] font-bold leading-none mb-0.5">1</div>
+                        <div class="text-[10px] uppercase tracking-wide opacity-90">LEVEL</div>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center justify-center border-r border-[#6ecfcf]">
+                        <div class="text-[20px] font-bold leading-none mb-0.5">0.759</div>
+                        <div class="text-[10px] uppercase tracking-wide opacity-90">CGPA</div>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center justify-center">
+                        <div class="text-[20px] font-bold leading-none mb-0.5">14</div>
+                        <div class="text-[10px] uppercase tracking-wide opacity-90">TRH</div>
+                    </div>
+                </div>
+
+                <!-- About Me -->
+                <div class="px-6 py-6">
+                    <h4 class="text-[11px] text-[#a0a5aa] font-medium uppercase tracking-wider mb-2">About me</h4>
+                    <div class="w-full h-[1px] bg-gray-200 mb-4"></div>
+                    <div class="text-[13.5px] text-[#6c757d] space-y-3 font-medium">
+                        <div class="flex"><span class="w-[85px] text-[#a0a5aa] uppercase tracking-wide">Faculty:</span> Nursing</div>
+                        <div class="flex"><span class="w-[85px] text-[#a0a5aa] uppercase tracking-wide">Program:</span> Nursing Science</div>
+                        <div class="flex"><span class="w-[85px] text-[#a0a5aa] uppercase tracking-wide">Guide:</span> mohamed reda</div>
+                        <div class="flex items-center"><span class="w-[85px] text-[#a0a5aa] uppercase tracking-wide">Status:</span> <span class="w-2.5 h-2.5 rounded-full bg-[#8bc97a] mr-1.5 inline-block"></span> Regular</div>
+                    </div>
+                </div>
+
+                <!-- Graduation Info -->
+                <div class="px-6 pb-6">
+                    <h4 class="text-[11px] text-[#a0a5aa] font-medium uppercase tracking-wider mb-2">Graduation info.</h4>
+                    <div class="w-full h-[1px] bg-gray-200 mb-6"></div>
+
+                    <!-- Circular Progress -->
+                    <div class="relative w-[140px] h-[140px] mx-auto mb-4">
+                        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 120 120">
+                            <circle cx="60" cy="60" r="54" fill="none" stroke="#f1f2f3" stroke-width="7" />
+                            <circle cx="60" cy="60" r="54" fill="none" stroke="#4bc0c0" stroke-width="7" stroke-dasharray="339.29" stroke-dashoffset="290" stroke-linecap="round" />
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center text-[#6c757d] mt-1">
+                            <div class="flex items-baseline">
+                                <span class="text-[34px] font-medium leading-none text-[#5a6268]">130</span>
+                                <span class="text-[14px] font-medium ml-0.5 text-[#5a6268]">Hrs</span>
+                            </div>
+                            <div class="text-[#a0a5aa] text-[11px] mt-1">to be Graduated</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bottom Action Buttons -->
+                <div class="flex mx-5 mb-8 mt-2 shrink-0 h-[45px] text-white font-medium text-[13.5px] rounded-[25px] overflow-hidden shadow-lg border border-gray-100">
+                    <button class="flex-1 flex items-center justify-center gap-1.5 bg-[#64b564] hover:bg-[#57a657] transition cursor-pointer">
+                        <i class="fa-solid fa-circle-question text-[15px]"></i> Help & Suggestions
+                    </button>
+                    <button class="flex-1 flex items-center justify-center gap-1.5 bg-[#243447] hover:bg-[#1b2736] transition cursor-pointer">
+                        <i class="fa-solid fa-circle-play text-[15px]"></i> Product Videos
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function handleLogin() {
+            // Hide login view
+            const loginView = document.getElementById('login-view');
+            loginView.classList.add('hidden');
+            
+            // Show profile view
+            const profileView = document.getElementById('profile-view');
+            profileView.classList.remove('hidden');
+            
+            // Change parent background color to white to match profile layout
+            document.getElementById('app-container').style.backgroundColor = '#ffffff';
+
+            // Reset scroll to top just in case
+            profileView.scrollTop = 0;
+        }
+    </script>
+</body>
+</html>
