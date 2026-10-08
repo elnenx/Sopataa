@@ -19,7 +19,8 @@
             background-color: #e5e7eb; /* Desktop background */
             margin: 0;
             padding: 0;
-            height: 100vh;
+            height: 100vh; /* Fallback for older browsers */
+            height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -29,7 +30,8 @@
         .mobile-container {
             width: 100%;
             max-width: 414px;
-            height: 100vh;
+            height: 100vh; /* Fallback for older browsers */
+            height: 100dvh;
             max-height: 900px;
             background-color: #345877; /* Default for login */
             display: flex;
@@ -86,7 +88,7 @@
                 <div class="bg-[#2b5b84] w-[20%]"></div>
             </div>
 
-            <main class="px-12 pt-8 pb-4 flex-grow bg-[#345877] flex flex-col justify-start min-h-0 overflow-y-auto">
+            <main class="px-12 pt-5 pb-4 flex-grow bg-[#345877] flex flex-col justify-start min-h-0 overflow-y-auto">
                 <form class="flex flex-col gap-3" onsubmit="event.preventDefault(); handleLogin();">
                     
                     <div class="flex bg-white h-[32px] items-center">
@@ -154,7 +156,7 @@
                 </form>
             </main>
 
-            <footer class="w-full shrink-0 mt-auto bg-[#345877]">
+            <footer class="w-full shrink-0 mt-auto bg-[#345877]" style="padding-bottom: env(safe-area-inset-bottom);">
                 <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1790663557/Screenshot_20260929_093113_Chrome_gciblm.jpg" alt="Nile Valley University Campus Footer" class="w-full h-auto block">
             </footer>
         </div>
